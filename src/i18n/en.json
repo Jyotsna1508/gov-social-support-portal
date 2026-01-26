@@ -1,0 +1,35 @@
+{
+  "personalInfo": {
+    "title": "Personal Information",
+    "name": "Name",
+    "nationalId": "National ID",
+    "dateOfBirth": "Date of Birth",
+    "gender": "Gender",
+    "address": "Address",
+    "city": "City",
+    "state": "State",
+    "country": "Country",
+    "phone": "Phone",
+    "email": "Email"
+  },
+  "familyInfo": {
+    "title": "Family & Financial Info",
+    "maritalStatus": "Marital Status",
+    "dependents": "Number of Dependents",
+    "employmentStatus": "Employment Status",
+    "monthlyIncome": "Monthly Income",
+    "housingStatus": "Housing Status"
+  },
+  "situation": {
+    "title": "Situation Descriptions",
+    "currentSituation": "Current Financial Situation",
+    "employmentCircumstances": "Employment Circumstances",
+    "reasonForApplying": "Reason for Applying",
+    "helpMeWrite": "Help Me Write"
+  },
+  "common" :{
+    "socialSupport": "Social Support",
+    "somethingWentWrong": "Something went wrong.",
+    "pleaseTryAgain": "Please try again later."
+  }
+}

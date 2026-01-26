@@ -1,0 +1,35 @@
+{
+  "personalInfo": {
+    "title": "معلومات شخصية",
+    "name": "الاسم",
+    "nationalId": "رقم الهوية",
+    "dateOfBirth": "تاريخ الميلاد",
+    "gender": "الجنس",
+    "address": "العنوان",
+    "city": "المدينة",
+    "state": "المحافظة",
+    "country": "البلد",
+    "phone": "الهاتف",
+    "email": "البريد الإلكتروني"
+  },
+  "familyInfo": {
+    "title": "المعلومات العائلية والمالية",
+    "maritalStatus": "الحالة الاجتماعية",
+    "dependents": "عدد المعالين",
+    "employmentStatus": "حالة العمل",
+    "monthlyIncome": "الدخل الشهري",
+    "housingStatus": "حالة السكن"
+  },
+  "situation": {
+    "title": "وصف الحالة",
+    "currentSituation": "الوضع المالي الحالي",
+    "employmentCircumstances": "ظروف العمل",
+    "reasonForApplying": "سبب التقديم",
+    "helpMeWrite": "ساعدني في الكتابة"
+  },
+  "common" :{
+    "socialSupport": "الدعم الاجتماعي",
+    "somethingWentWrong": "حدث خطأ ما.",
+    "pleaseTryAgain": "يرجى المحاولة مرة أخرى لاحقًا."
+  }
+}
