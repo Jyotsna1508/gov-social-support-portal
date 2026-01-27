@@ -30,6 +30,10 @@
   "common" :{
     "socialSupport": "Social Support",
     "somethingWentWrong": "Something went wrong.",
-    "pleaseTryAgain": "Please try again later."
+    "pleaseTryAgain": "Please try again later.",
+    "submit": "Submit",
+    "next": "Next",
+    "back": "Back",
+    "formSubmitted": "Form submitted successfully!"
   }
 }

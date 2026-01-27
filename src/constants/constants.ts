@@ -10,6 +10,14 @@ export const DIRECTION = {
     RTL: 'rtl',
     LTR: 'ltr'
 }
+export const steps = ['personalInfo', 'familyInfo', 'situation'];
+export const stepPaths = ["personal", "family", "situation"];
+
+export const STEPS_FALLBACK_TEXT: Record<string, string> = {
+  loadingFamilyInfo: "Loading Family Info...",
+  loadingSituationInfo: "Loading Situation Info...",
+};
+
 
 export const INITIAL_USER_FORM_DATA: UserFormData = {
   personalInfo: {

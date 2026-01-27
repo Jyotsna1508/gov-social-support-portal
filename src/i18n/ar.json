@@ -30,6 +30,10 @@
   "common" :{
     "socialSupport": "الدعم الاجتماعي",
     "somethingWentWrong": "حدث خطأ ما.",
-    "pleaseTryAgain": "يرجى المحاولة مرة أخرى لاحقًا."
+    "pleaseTryAgain": "يرجى المحاولة مرة أخرى لاحقًا.",
+    "submit": "إرسال",
+    "next": "التالي",
+    "back": "السابق",
+    "formSubmitted": "تم تقديم النموذج بنجاح!"
   }
 }

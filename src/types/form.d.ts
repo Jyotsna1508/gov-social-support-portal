@@ -37,3 +37,8 @@ export interface FormState {
   data: UserFormData;
 }
 
+export interface StepperWizardProps {
+  steps: string[];
+  activeStep: number;
+}
+
