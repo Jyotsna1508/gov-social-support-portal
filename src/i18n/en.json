@@ -46,6 +46,10 @@
     "employmentStatus.unemployed": "Unemployed",
     "monthlyIncome": "Monthly Income",
     "housingStatus": "Housing Status",
+    "housingStatus.owned": "Owned",
+    "housingStatus.rented": "Rented",
+    "housingStatus.mortgaged": "Mortgaged",
+    "housingStatus.other": "Other",
     "errors": {
       "maritalStatusRequired": "Marital Status is required",
       "dependentsRequired": "Dependents is required",
@@ -71,7 +75,11 @@
     "suggestion": "AI Suggestion",
     "accept": "Accept",
     "edit": "Edit",
-    "discard": "Discard"
+    "discard": "Discard",
+    "generatingSuggestion": "Generating suggestion...",
+    "requestAborted": "AI request aborted",
+    "requestFailed": "AI seems unavailable now. Please try in some time.",
+    "unknownError": "Unknown error occurred while streaming AI"
   },
   "common" :{
     "socialSupport": "Social Support",

@@ -53,6 +53,7 @@ export interface FormInputProps {
   name: string;
   placeholderKey: string;
   type?: string;
+  rows?: number;
   options?: { label: string; value: string }[];
   register: UseFormRegister<FieldValues>;
   validation?: RegisterOptions;

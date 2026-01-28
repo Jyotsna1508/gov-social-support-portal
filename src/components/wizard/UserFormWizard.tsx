@@ -3,6 +3,7 @@ import {
   steps,
   stepPaths,
   INITIAL_USER_FORM_DATA,
+  alertCss,
 } from "../../constants/constants";
 import { useTranslation } from "react-i18next";
 import { useForm, FormProvider } from "react-hook-form";
@@ -29,6 +30,8 @@ import StepperWizard from "../ui/Stepper";
 import { submitUserForm } from "../../store/formSubmitThunk";
 import type { AppDispatch } from "../../store";
 import Loader from "../ui/Loader";
+import { Alert } from "@mui/material";
+import { useEffect, useState } from "react";
 
 const formSteps = steps;
 
@@ -40,12 +43,21 @@ const UserFormWizard: React.FC = () => {
   const userFormData = useSelector(selectFormData);
   const isSubmitting = useSelector(selectFormSubmitting);
   const submitError = useSelector(selectFormSubmitError);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  // set method to all to handle all -> submit, onchange and onblur
   const methods = useForm<UserFormData>({
     mode: "all",
     shouldUnregister: false,
     defaultValues: userFormData,
   });
   const isLastStep = activeStep === steps.length - 1;
+  // reset submit after 5 sec in order to hide alert
+  useEffect(() => {
+    if (submitSuccess) {
+      const timer = setTimeout(() => setSubmitSuccess(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [submitSuccess]);
   
   // Update Redux based on active step
   const setDataOnStepChange = () => {
@@ -87,7 +99,8 @@ const UserFormWizard: React.FC = () => {
       .unwrap()
       .then(() => {
         methods.reset(INITIAL_USER_FORM_DATA);
-        alert("Form submitted successfully!!")
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setSubmitSuccess(true);
         navigate(`/user-wizard/${stepPaths[0]}`);
       })
       .catch((err) => {
@@ -95,13 +108,14 @@ const UserFormWizard: React.FC = () => {
       });
   };
   return (
-    <FormProvider {...methods}>
+    <FormProvider {...methods}> 
+      {submitSuccess && <Alert variant="filled" severity="success" sx={alertCss}>"Form Submitted"</Alert>}
       {isSubmitting && <Loader />}
       <form onSubmit={methods.handleSubmit(onSubmit)} className="mt-6">
         {/* Stepper */}
         <StepperWizard steps={formSteps} activeStep={activeStep} />
         {/* Step Form */}
-        <fieldset className="mx-auto max-w-3/5 w-3/5 mt-6 border p-4 rounded">
+        <fieldset className="mx-auto md:max-w-3/5 sm:max-w-full sm:w-full md:w-3/5 mt-6 border p-4 rounded">
           <Outlet />
         </fieldset>
         {/* Navigation */}

@@ -95,7 +95,13 @@ export const FamilyFormData = [
       {
         name: "familyInfo.housingStatus",
         label: "familyInfo.housingStatus",
-        type: "text",
+        type: "select",
+        options: [
+          { label: "familyInfo.housingStatus.owned", value: "owned" },
+          { label: "familyInfo.housingStatus.rented", value: "rented" },
+          { label: "familyInfo.housingStatus.mortgaged", value: "mortgaged" },
+          { label: "familyInfo.housingStatus.other", value: "other" },
+        ],
         validation: REQUIRED("familyInfo.errors.housingStatusRequired"),
       },
     ]

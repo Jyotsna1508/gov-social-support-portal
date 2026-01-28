@@ -1,4 +1,3 @@
-// src/components/forms/steps/FamilyInfo.tsx
 import React from "react";
 import { useFormContext, type FieldValues } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -12,7 +11,7 @@ const FamilyInfo: React.FC = () => {
     register,
     formState: { errors },
   } = useFormContext<FieldValues>();
-
+ // reading values from userFormField
   const fieldRows = FamilyFormData;
   return (
     <fieldset className="p-4 border rounded">

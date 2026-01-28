@@ -1,4 +1,3 @@
-// src/components/forms/steps/SituationInfo.tsx
 import React from "react";
 import { useFormContext, type FieldValues } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -10,13 +9,12 @@ import { getErrorMessage } from "../../../utils/formHelpers";
 const SituationInfo: React.FC = () => {
   const { t } = useTranslation();
   const { register, setValue, formState: { errors } } = useFormContext<FieldValues>();
+  // reading form value from userFormField.ts
+  const fieldRows = CurrentSituationInfo;
 
   const handleAcceptSuggestion = (fieldName: string, suggestion: string) => {
-    setValue(fieldName, suggestion);
+    setValue(fieldName, suggestion, { shouldValidate: true });
   };
-
-  // Fields in pairs per row
-  const fieldRows = CurrentSituationInfo;
 
   return (
     <fieldset className="p-4 border rounded">
@@ -32,6 +30,7 @@ const SituationInfo: React.FC = () => {
                     <FormInput
                       name={field.name}
                       type="textarea"
+                      rows={3} 
                       placeholderKey= {t(`${field.label}`)}
                       register={register}
                       validation={field.validation}
@@ -41,7 +40,7 @@ const SituationInfo: React.FC = () => {
 
                   <div className="w-1/3 flex justify-start mt-0">
                     <AiSuggestionPopup
-                      fieldName= {t(`${field.label}`)}
+                      fieldName= {field.name}
                       onAccept={(suggestion) => handleAcceptSuggestion(field.name, suggestion)}
                     />
                   </div>

@@ -45,3 +45,21 @@ export const INITIAL_USER_FORM_DATA: UserFormData = {
     reasonForApplying: "",
   },
 };
+
+export const alertCss = {
+    width: "50%",
+    margin: "16px auto",
+    mb: 2
+};
+
+export const boxStyle = {
+  position: "absolute" as const,
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  borderRadius: 2,
+  boxShadow: 24,
+  p: 4,
+  width: { xs: "90%", sm: 400 },
+};

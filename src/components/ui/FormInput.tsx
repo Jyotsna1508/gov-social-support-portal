@@ -5,6 +5,7 @@ const FormInput = ({
   placeholderKey,
   type = "text",
   options,
+  rows = 3,
   register,
   validation,
   error,
@@ -26,17 +27,27 @@ const FormInput = ({
     );
   }
 
-  return (
-    <div>
+ return (
+  <div>
+    {type === "textarea" ? (
+      <textarea
+        {...register(name, validation)}
+        placeholder={placeholderKey}
+        rows={rows || 3}
+        className={`p-2 rounded border ${borderClass} w-full`}
+      />
+    ) : (
       <input
         type={type}
         {...register(name, validation)}
         placeholder={placeholderKey}
-       className={`p-2 rounded border ${borderClass} w-full`}
+        className={`p-2 rounded border ${borderClass} w-full`}
       />
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-    </div>
-  );
+    )}
+
+    {error && <p className="text-red-500 text-sm">{error}</p>}
+  </div>
+);
 };
 
 export default FormInput;

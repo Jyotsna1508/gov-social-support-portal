@@ -46,6 +46,10 @@
     "employmentStatus.unemployed": "عاطل عن العمل",
     "monthlyIncome": "الدخل الشهري",
     "housingStatus": "حالة السكن",
+    "housingStatus.owned": "مملوكة",
+    "housingStatus.rented": "مستأجرة",
+    "housingStatus.mortgaged": "مرهونة",
+    "housingStatus.other": "أخرى",
     "errors": {
       "maritalStatusRequired": "الحالة الاجتماعية مطلوبة",
       "dependentsRequired": "عدد المعالين مطلوب",
@@ -71,7 +75,11 @@
     "suggestion": "اقتراح الذكاء الاصطناعي",
     "accept": "قبول",
     "edit": "تعديل",
-    "discard": "رفض"
+    "discard": "رفض",
+    "generatingSuggestion": "جارٍ إنشاء الاقتراح...",
+    "requestAborted": "تم إلغاء طلب الذكاء الاصطناعي",
+    "requestFailed": "يبدو أن الذكاء الاصطناعي غير متاح حالياً. الرجاء المحاولة بعد قليل.",
+    "unknownError": "حدث خطأ غير معروف أثناء تدفق الذكاء الاصطناعي"
   },
   "common" :{
     "socialSupport": "الدعم الاجتماعي",
