@@ -10,22 +10,68 @@
     "state": "State",
     "country": "Country",
     "phone": "Phone",
-    "email": "Email"
+    "email": "Email",
+     "genderOptions": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "errors": {
+      "nameRequired": "Name is required",
+      "nationalIdRequired": "National ID is required",
+      "nationalIdPattern": "National ID must contain only numbers",
+      "dobRequired": "Date of birth is required",
+      "genderRequired": "Gender is required",
+      "addressRequired": "Address is required",
+      "cityRequired": "City is required",
+      "stateRequired": "State is required",
+      "countryRequired": "Country is required",
+      "phoneRequired": "Mobile number is required",
+      "phonePattern": "Please enter a valid mobile number",
+      "emailRequired": "Email address is required",
+      "emailPattern": "Please enter a valid email address",
+      "ageMustBe18": "Age must be min 18 years"
+    }
   },
   "familyInfo": {
-    "title": "Family & Financial Info",
+    "title": "Family & Financial Information",
     "maritalStatus": "Marital Status",
-    "dependents": "Number of Dependents",
+    "maritalStatus.married": "Married",
+    "maritalStatus.single": "Single",
+    "maritalStatus.divorced": "Divorced",
+    "dependents": "Dependents",
     "employmentStatus": "Employment Status",
+    "employmentStatus.employed": "Employed",
+    "employmentStatus.selfEmployed": "Self-Employed",
+    "employmentStatus.unemployed": "Unemployed",
     "monthlyIncome": "Monthly Income",
-    "housingStatus": "Housing Status"
+    "housingStatus": "Housing Status",
+    "errors": {
+      "maritalStatusRequired": "Marital Status is required",
+      "dependentsRequired": "Dependents is required",
+      "employmentStatusRequired": "Employment Status is required",
+      "monthlyIncomeRequired": "Monthly Income is required",
+      "housingStatusRequired": "Housing Status is required"
+    }
   },
-  "situation": {
+  "situationInfo": {
     "title": "Situation Descriptions",
     "currentSituation": "Current Financial Situation",
     "employmentCircumstances": "Employment Circumstances",
     "reasonForApplying": "Reason for Applying",
-    "helpMeWrite": "Help Me Write"
+    "helpMeWrite": "Help Me Write",
+    "errors": {
+      "currentSituationRequired": "Current Financial Situation is required",
+      "employmentCircumstancesRequired": "Employment Circumstances is required",
+      "reasonForApplyingRequired": "Reason for Applying is required"
+    }
+  },
+   "aiInfo": {
+    "helpMeWrite": "Help Me Write",
+    "suggestion": "AI Suggestion",
+    "accept": "Accept",
+    "edit": "Edit",
+    "discard": "Discard"
   },
   "common" :{
     "socialSupport": "Social Support",
@@ -34,6 +80,7 @@
     "submit": "Submit",
     "next": "Next",
     "back": "Back",
-    "formSubmitted": "Form submitted successfully!"
+    "formSubmitted": "Form submitted successfully!",
+    "minLength": "Minimum length is required"
   }
 }

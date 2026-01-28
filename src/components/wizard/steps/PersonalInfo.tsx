@@ -1,7 +1,50 @@
-import type React from "react";
-
+// src/components/forms/steps/PersonalInfo.tsx
+import React from "react";
+import { useFormContext, type FieldValues } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import FormInput from "../../ui/FormInput";
+import { PersonalFormData } from "../userFormField";
+import { getErrorMessage } from "../../../utils/formHelpers";
 const PersonalInfo: React.FC = () => {
-    return <h1>Personal Info</h1>;
+  const { t } = useTranslation();
+
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<FieldValues>();
+
+  const fieldRows = PersonalFormData;
+  return (
+    <fieldset className="p-4 border rounded">
+      <legend className="font-bold mb-4">{t("personalInfo.title")}</legend>
+
+      <div className="flex flex-col gap-4">
+        {fieldRows.map((row, rowIndex) => (
+          <div
+            key={rowIndex}
+            className={`grid gap-4 ${row.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}
+          >
+            {row.map((field) => (
+              <div key={field.name}>
+                <label htmlFor={field.name} className="font-semibold mb-0">
+                  {t(`${field.label}`)}
+                </label>
+                <FormInput
+                  name={field.name}
+                  type={field.type}
+                  options={field.options?.map(o => ({ ...o, label: t(o.label) }))}
+                  placeholderKey= {t(`${field.label}`)}
+                  register={register}
+                  validation={field.validation}
+                  error={getErrorMessage(errors, field.name, t)}
+                />
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </fieldset>
+  );
 };
 
 export default PersonalInfo;

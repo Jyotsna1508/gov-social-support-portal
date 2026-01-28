@@ -10,22 +10,68 @@
     "state": "المحافظة",
     "country": "البلد",
     "phone": "الهاتف",
-    "email": "البريد الإلكتروني"
+    "email": "البريد الإلكتروني",
+    "genderOptions": {
+      "male": "ذكر",
+      "female": "أنثى",
+      "other": "أخرى"
+    },
+    "errors": {
+      "nameRequired": "الاسم مطلوب",
+      "nationalIdRequired": "الرقم الوطني مطلوب",
+      "nationalIdPattern": "يجب أن يحتوي الرقم الوطني على أرقام فقط",
+      "dobRequired": "تاريخ الميلاد مطلوب",
+      "genderRequired": "الجنس مطلوب",
+      "addressRequired": "العنوان مطلوب",
+      "cityRequired": "المدينة مطلوبة",
+      "stateRequired": "المنطقة مطلوبة",
+      "countryRequired": "الدولة مطلوبة",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "phonePattern": "يرجى إدخال رقم هاتف صحيح",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailPattern": "يرجى إدخال بريد إلكتروني صحيح",
+      "ageMustBe18": "يجب ألا يقل العمر عن 18 عامًا"
+    }
   },
   "familyInfo": {
-    "title": "المعلومات العائلية والمالية",
+    "title": "معلومات الأسرة والمالية",
     "maritalStatus": "الحالة الاجتماعية",
+    "maritalStatus.married": "متزوج",
+    "maritalStatus.single": "أعزب",
+    "maritalStatus.divorced": "مطلق",
     "dependents": "عدد المعالين",
     "employmentStatus": "حالة العمل",
+    "employmentStatus.employed": "موظف",
+    "employmentStatus.selfEmployed": "عمل مستقل",
+    "employmentStatus.unemployed": "عاطل عن العمل",
     "monthlyIncome": "الدخل الشهري",
-    "housingStatus": "حالة السكن"
+    "housingStatus": "حالة السكن",
+    "errors": {
+      "maritalStatusRequired": "الحالة الاجتماعية مطلوبة",
+      "dependentsRequired": "عدد المعالين مطلوب",
+      "employmentStatusRequired": "حالة العمل مطلوبة",
+      "monthlyIncomeRequired": "الدخل الشهري مطلوب",
+      "housingStatusRequired": "حالة السكن مطلوبة"
+    }
   },
-  "situation": {
+  "situationInfo": {
     "title": "وصف الحالة",
     "currentSituation": "الوضع المالي الحالي",
     "employmentCircumstances": "ظروف العمل",
     "reasonForApplying": "سبب التقديم",
-    "helpMeWrite": "ساعدني في الكتابة"
+    "helpMeWrite": "ساعدني في الكتابة",
+    "errors": {
+      "currentSituationRequired": "الوضع المالي الحالي مطلوب",
+      "employmentCircumstancesRequired": "ظروف العمل مطلوبة",
+      "reasonForApplyingRequired": "سبب التقديم مطلوب"
+    }
+  },
+  "aiInfo": {
+    "helpMeWrite": "ساعدني في الكتابة",
+    "suggestion": "اقتراح الذكاء الاصطناعي",
+    "accept": "قبول",
+    "edit": "تعديل",
+    "discard": "رفض"
   },
   "common" :{
     "socialSupport": "الدعم الاجتماعي",
@@ -34,6 +80,7 @@
     "submit": "إرسال",
     "next": "التالي",
     "back": "السابق",
-    "formSubmitted": "تم تقديم النموذج بنجاح!"
+    "formSubmitted": "تم تقديم النموذج بنجاح!",
+     "minLength": "الحد الأدنى للطول مطلوب"
   }
 }

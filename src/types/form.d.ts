@@ -1,3 +1,4 @@
+import { type RegisterOptions } from "react-hook-form";
 export interface PersonalInfoData {
   name: string;
   nationalId: string;
@@ -35,10 +36,27 @@ export interface UserFormData {
 export interface FormState {
   activeStep: number;
   data: UserFormData;
+  isSubmitting: boolean,
+  submitError: string | null,
 }
 
 export interface StepperWizardProps {
   steps: string[];
   activeStep: number;
 }
+export interface SelectOption {
+  label: string;
+  value: string;
+}
+
+export interface FormInputProps {
+  name: string;
+  placeholderKey: string;
+  type?: string;
+  options?: { label: string; value: string }[];
+  register: UseFormRegister<FieldValues>;
+  validation?: RegisterOptions;
+  error?: string
+}
+
 

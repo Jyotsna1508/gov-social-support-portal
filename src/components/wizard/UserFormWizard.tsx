@@ -1,5 +1,9 @@
 import type React from "react";
-import { steps, stepPaths } from "../../constants/constants";
+import {
+  steps,
+  stepPaths,
+  INITIAL_USER_FORM_DATA,
+} from "../../constants/constants";
 import { useTranslation } from "react-i18next";
 import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,30 +11,42 @@ import { Outlet, useNavigate } from "react-router-dom";
 import {
   nextStep,
   prevStep,
-  resetForm,
   selectActiveStep,
   selectFormData,
+  selectFormSubmitError,
+  selectFormSubmitting,
   updateFamilyInfo,
+  updateForm,
   updatePersonalInfo,
   updateSituationInfo,
 } from "../../store/formSlice";
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import type { UserFormData } from "../../types/form";
 import StepperWizard from "../ui/Stepper";
+import { submitUserForm } from "../../store/formSubmitThunk";
+import type { AppDispatch } from "../../store";
+import Loader from "../ui/Loader";
 
 const formSteps = steps;
 
 const UserFormWizard: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const activeStep = useSelector(selectActiveStep);
   const userFormData = useSelector(selectFormData);
+  const isSubmitting = useSelector(selectFormSubmitting);
+  const submitError = useSelector(selectFormSubmitError);
   const methods = useForm<UserFormData>({
-    mode: "onBlur",
+    mode: "all",
     shouldUnregister: false,
     defaultValues: userFormData,
   });
   const isLastStep = activeStep === steps.length - 1;
+  
   // Update Redux based on active step
   const setDataOnStepChange = () => {
     const values = methods.getValues();
@@ -66,46 +82,50 @@ const UserFormWizard: React.FC = () => {
     }
   };
   const onSubmit = (data: UserFormData) => {
-    console.log("Final Submit:", data);
-    alert(t("common.formSubmitted"));
-    dispatch(resetForm());
-    navigate(`/user-wizard/${stepPaths[0]}`);
+    dispatch(updateForm(data));
+    dispatch(submitUserForm())
+      .unwrap()
+      .then(() => {
+        methods.reset(INITIAL_USER_FORM_DATA);
+        alert("Form submitted successfully!!")
+        navigate(`/user-wizard/${stepPaths[0]}`);
+      })
+      .catch((err) => {
+        console.error("Submit failed:", err);
+      });
   };
   return (
     <FormProvider {...methods}>
+      {isSubmitting && <Loader />}
       <form onSubmit={methods.handleSubmit(onSubmit)} className="mt-6">
         {/* Stepper */}
         <StepperWizard steps={formSteps} activeStep={activeStep} />
         {/* Step Form */}
-        <fieldset className="mx-auto max-w-10/12 mt-6 border p-4 rounded">
+        <fieldset className="mx-auto max-w-3/5 w-3/5 mt-6 border p-4 rounded">
           <Outlet />
         </fieldset>
         {/* Navigation */}
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center gap-4 mt-6">
           {activeStep > 0 && (
-            <button
-              type="button"
-              className="px-4 py-2 m-2 border rounded"
-              onClick={onBack}
-            >
-              {t("common.back")}
-            </button>
+            <Button variant="outlined" startIcon={<ArrowBackIosIcon />}  onClick={onBack}>{t("common.back")}</Button>
           )}
           {!isLastStep ? (
-            <button
-              type="button"
-              className="px-4 py-2 m-2 bg-blue-600 text-white rounded"
+            <Button
+              variant="contained" 
+              endIcon={<NavigateNextIcon />}
               onClick={onNext}
             >
               {t("common.next")}
-            </button>
+            </Button>
           ) : (
-            <button
-              type="submit"
-              className="px-4 py-2 m-2 bg-green-600 text-white rounded"
-            >
-              {t("common.submit")}
-            </button>
+            <>
+              <Button variant="contained" type="submit" endIcon={<SendIcon />} disabled={!methods.formState.isValid || isSubmitting}>
+                {t("common.submit")}
+              </Button>
+              {submitError && (
+                <p className="text-red-600 mt-2">{submitError}</p>
+              )}
+            </>
           )}
         </div>
       </form>

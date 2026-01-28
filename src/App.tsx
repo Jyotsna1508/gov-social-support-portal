@@ -3,21 +3,51 @@ import Header from "./components/layout/Header";
 import { LanguageProvider } from "./contexts/languageContext/LanguageContext";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AppRoutes } from "./routes/routes";
+import { useTranslation } from "react-i18next";
+import { CacheProvider } from "@emotion/react";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import createCache from "@emotion/cache";
+import stylisRTLPlugin from "stylis-plugin-rtl";
+import { DIRECTION, LANGUAGE } from "./constants/constants";
 
+// Function to create RTL or LTR emotion cache
+// this is used for MUI elements to adapt the language change
+const createEmotionCache = (isRtl: boolean) =>
+  createCache({
+    key: isRtl ? "mui-rtl" : "mui-ltr",
+    stylisPlugins: isRtl ? [stylisRTLPlugin] : [],
+  });
 function App() {
+  const { i18n } = useTranslation();
+  const isRtl = i18n.language === LANGUAGE.AR;
+
+  // Set body direction
+  // eslint-disable-next-line react-hooks/immutability
+  document.body.dir = isRtl ? DIRECTION.RTL : DIRECTION.LTR;
+  const cache = createEmotionCache(isRtl);
+
+  const theme = createTheme({
+    direction: isRtl ? "rtl" : "ltr",
+  });
+
   return (
-    <LanguageProvider>
-      <ErrorBoundary>
-        <div className="min-h-screen bg-gray-50 p-4">
-          <Header />
-          <main className="mt-6">
-            <Router>
-              <AppRoutes />
-            </Router>
-          </main>
-        </div>
-      </ErrorBoundary>
-    </LanguageProvider>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <LanguageProvider>
+          <ErrorBoundary>
+            <div className="min-h-screen bg-gray-50 px-1 py-0 sm:px-0">
+              <Header />
+              <main className="mt-6">
+                <Router>
+                  <AppRoutes />
+                </Router>
+              </main>
+            </div>
+          </ErrorBoundary>
+        </LanguageProvider>
+      </ThemeProvider>
+    </CacheProvider>
   );
 }
 

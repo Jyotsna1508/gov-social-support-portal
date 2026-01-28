@@ -10,7 +10,7 @@ export const DIRECTION = {
     RTL: 'rtl',
     LTR: 'ltr'
 }
-export const steps = ['personalInfo', 'familyInfo', 'situation'];
+export const steps = ['personalInfo', 'familyInfo', 'situationInfo'];
 export const stepPaths = ["personal", "family", "situation"];
 
 export const STEPS_FALLBACK_TEXT: Record<string, string> = {
