@@ -12,8 +12,6 @@ export const generatePrompt = (
   const income = parseInt(financialData.monthlyIncome as string, 10) || 0;
   switch (fieldName) {
     case "situationInfo.currentSituation":
-      prompt = "Help me describe my financial situation. ";
-
       if (financialData.employmentStatus === "unemployed") {
         prompt += "I am unemployed";
       } else if (financialData.employmentStatus === "employed") {
@@ -40,8 +38,6 @@ export const generatePrompt = (
       break;
 
     case "situationInfo.employmentCircumstances":
-      prompt = "Help me describe my employment circumstances. ";
-
       if (financialData.employmentStatus === "unemployed") {
         prompt += "I am currently unemployed";
       } else if (financialData.employmentStatus === "employed") {
@@ -54,8 +50,6 @@ export const generatePrompt = (
       break;
 
     case "situationInfo.reasonForApplying":
-      prompt = "Explain my reason for applying. ";
-
       if (income === 0) {
         prompt += "I am applying because I have no income and need financial assistance.";
       } else {

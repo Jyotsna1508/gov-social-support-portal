@@ -6,16 +6,12 @@ import { coreFetch } from "./coreApi";
  */
 export const streamAi = async ({
   prompt,
-  financialData,
   model = "gpt-3.5-turbo",
   temperature = 0.7,
   onToken,
   onError,
   signal,
 }: AiStreamParams) => {
-  const fullPrompt = financialData
-    ? `User Financial Info: ${JSON.stringify(financialData)}\n\nQuestion: ${prompt}`
-    : prompt;
 
   try {
     const response = await coreFetch({
@@ -29,7 +25,7 @@ export const streamAi = async ({
             content:
               "You help users write concise, empathetic, and realistic descriptions based on user data.",
           },
-          { role: "user", content: fullPrompt },
+          { role: "user", content: prompt },
         ],
         temperature,
         stream: true,

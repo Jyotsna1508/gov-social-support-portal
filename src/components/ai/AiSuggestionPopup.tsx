@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Modal, Box, Typography, Stack, CircularProgress, TextField } from "@mui/material";
 import type { AiSuggestionPopupProps } from "../../types/ai";
 import { useSelector } from "react-redux";
 import { selectFamilyInfo } from "../../store/formSlice";
-import { streamAi } from "../../services/ai";
+import { streamAi } from "../../services/streamAi";
 import { boxStyle } from "../../constants/constants";
 import { generatePrompt } from "../../utils/promtGenerator";
 
-const AiSuggestionPopup: React.FC<AiSuggestionPopupProps> = ({
-  fieldName,
-  onAccept,
-}) => {
+const AiSuggestionPopup = React.memo(({ fieldName, onAccept }: AiSuggestionPopupProps) => {
   const { t } = useTranslation();
   const financialData = useSelector(selectFamilyInfo);
   const [popupText, setPopupText] = useState<string | null>(null);
@@ -32,7 +29,6 @@ const AiSuggestionPopup: React.FC<AiSuggestionPopupProps> = ({
      try {
       await streamAi({
         prompt: generatePrompt(financialData, fieldName),
-        financialData,
         signal: newController.signal,
         onToken: (token: string) => setPopupText((prev) => prev + token),
       });
@@ -49,20 +45,27 @@ const AiSuggestionPopup: React.FC<AiSuggestionPopupProps> = ({
     }
   };
 
-  const handleEdit = () => {
-    if (controller) controller.abort();
-    setLoading(false);
-    setIsEditing(true);
-  }
+    const handleClose = useCallback(() => {
+      if (controller) controller.abort();
+      setPopupText("");
+      setLoading(false);
+      setIsEditing(false);
+      setError(null);
+      setIsOpen(false);
+    }, [controller]);
 
-  const handleClose = () => {
-    if (controller) controller.abort();
-    setPopupText("");
-    setLoading(false);
-    setIsEditing(false);
-    setError(null);
-    setIsOpen(false);
+    const handleEdit = useCallback(() => {
+      if (controller) controller.abort();
+      setLoading(false);
+      setIsEditing(true);
+    }, [controller]);
+
+   const handleAccept = useCallback(() => {
+  if (popupText) {
+    onAccept(fieldName, popupText);
+    handleClose();
   }
+}, [popupText, fieldName, onAccept, handleClose]);
 
   return (
     <>
@@ -72,6 +75,9 @@ const AiSuggestionPopup: React.FC<AiSuggestionPopupProps> = ({
         color="primary"
         onClick={handleHelpMeWrite}
         disabled={loading}
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
+        aria-controls="ai-suggestion-modal"
         sx={{ p: 1 }}
       >
         {loading ? <CircularProgress size={20} /> : t("aiInfo.helpMeWrite")}
@@ -85,8 +91,21 @@ const AiSuggestionPopup: React.FC<AiSuggestionPopupProps> = ({
         aria-describedby="ai-suggestion-description"
         closeAfterTransition
       >
-        <Box sx={boxStyle}>
-          <Typography id="ai-suggestion-title" variant="h6" mb={2}>
+        <Box
+          sx={boxStyle}
+          id="ai-suggestion-modal"
+          role="dialog"
+          aria-modal="true"
+          tabIndex={-1}
+        >
+          <Typography
+            id="ai-suggestion-title"
+            variant="h6"
+            mb={2}
+            fontWeight={600}
+            borderBottom={1}
+            borderColor="divider"
+          >
             {t("aiInfo.suggestion")}
           </Typography>
           {loading && (
@@ -96,7 +115,19 @@ const AiSuggestionPopup: React.FC<AiSuggestionPopupProps> = ({
             </Stack>
           )}
 
-          {error && <Typography color="error">{t(error)}</Typography>}
+          {error && (
+            <Typography
+              color="error.main"
+              role="alert"
+              mb={2}
+              p={1.5}
+              bgcolor="#ffe5e5"
+              borderRadius={1}
+              boxShadow={1}
+            >
+              {t(error)}
+            </Typography>
+          )}
 
           {isEditing ? (
             <TextField
@@ -105,9 +136,11 @@ const AiSuggestionPopup: React.FC<AiSuggestionPopupProps> = ({
               minRows={4}
               value={popupText}
               onChange={(e) => setPopupText(e.target.value)}
+              autoFocus
+              aria-label={t("aiInfo.edit")}
             />
           ) : (
-            <Typography id="ai-suggestion-description" mb={3}>
+            <Typography id="ai-suggestion-description" mb={3} component="div" whiteSpace="pre-line">
               {popupText}
             </Typography>
           )}
@@ -119,10 +152,7 @@ const AiSuggestionPopup: React.FC<AiSuggestionPopupProps> = ({
               variant="contained"
               color="success"
               disabled={!popupText || !!error}
-              onClick={() => {
-                onAccept(popupText!);
-                handleClose();
-              }}
+              onClick={handleAccept}
             >
               {t("aiInfo.accept")}
             </Button>
@@ -141,6 +171,6 @@ const AiSuggestionPopup: React.FC<AiSuggestionPopupProps> = ({
       </Modal>
     </>
   );
-};
+});
 
 export default AiSuggestionPopup;

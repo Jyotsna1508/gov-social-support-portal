@@ -1,8 +1,6 @@
-import type { FamilyInfoData } from "./form";
 
 export interface AiStreamParams {
   prompt: string;
-  financialData?: FamilyInfoData;
   model?: string;
   temperature?: number;
   onToken: (token: string) => void;
@@ -19,7 +17,7 @@ export type FieldName = "currentSituation" | "employmentCircumstances" | "reason
 
 export interface AiSuggestionPopupProps {
   fieldName: string;
-  onAccept: (suggestion: string) => void;
+  onAccept: (fieldName: string, suggestion: string) => void;
 }
 
 export interface RootState {

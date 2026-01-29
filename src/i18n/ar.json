@@ -30,26 +30,33 @@
       "phonePattern": "يرجى إدخال رقم هاتف صحيح",
       "emailRequired": "البريد الإلكتروني مطلوب",
       "emailPattern": "يرجى إدخال بريد إلكتروني صحيح",
-      "ageMustBe18": "يجب ألا يقل العمر عن 18 عامًا"
+      "ageMustBe18": "يجب ألا يقل العمر عن 18 عامًا",
+      "ageMustBeUnder60": "يجب ألا يتجاوز العمر 60 عامًا"
     }
   },
   "familyInfo": {
     "title": "معلومات الأسرة والمالية",
     "maritalStatus": "الحالة الاجتماعية",
-    "maritalStatus.married": "متزوج",
-    "maritalStatus.single": "أعزب",
-    "maritalStatus.divorced": "مطلق",
+    "maritalStatusOptions": {
+      "married": "متزوج",
+      "single": "أعزب",
+      "divorced": "مطلق"
+    },
     "dependents": "عدد المعالين",
     "employmentStatus": "حالة العمل",
-    "employmentStatus.employed": "موظف",
-    "employmentStatus.selfEmployed": "عمل مستقل",
-    "employmentStatus.unemployed": "عاطل عن العمل",
+    "employmentStatusOptions": {
+      "employed": "موظف",
+      "selfEmployed": "عمل مستقل",
+      "unemployed": "عاطل عن العمل"
+    },
     "monthlyIncome": "الدخل الشهري",
     "housingStatus": "حالة السكن",
-    "housingStatus.owned": "مملوكة",
-    "housingStatus.rented": "مستأجرة",
-    "housingStatus.mortgaged": "مرهونة",
-    "housingStatus.other": "أخرى",
+    "housingStatusOptions": {
+      "owned": "مملوكة",
+      "rented": "مستأجرة",
+      "mortgaged": "مرهونة",
+      "other": "أخرى"
+    },
     "errors": {
       "maritalStatusRequired": "الحالة الاجتماعية مطلوبة",
       "dependentsRequired": "عدد المعالين مطلوب",
@@ -81,7 +88,7 @@
     "requestFailed": "يبدو أن الذكاء الاصطناعي غير متاح حالياً. الرجاء المحاولة بعد قليل.",
     "unknownError": "حدث خطأ غير معروف أثناء تدفق الذكاء الاصطناعي"
   },
-  "common" :{
+  "common": {
     "socialSupport": "الدعم الاجتماعي",
     "somethingWentWrong": "حدث خطأ ما.",
     "pleaseTryAgain": "يرجى المحاولة مرة أخرى لاحقًا.",
@@ -89,6 +96,12 @@
     "next": "التالي",
     "back": "السابق",
     "formSubmitted": "تم تقديم النموذج بنجاح!",
-     "minLength": "الحد الأدنى للطول مطلوب"
+    "minLength": "الحد الأدنى للطول مطلوب",
+    "maxLength": "تم الوصول إلى الحد الأقصى للطول",
+    "switchLanguage": "تبديل اللغة",
+    "uaeGovernment": "حكومة الإمارات العربية المتحدة. جميع الحقوق محفوظة.",
+    "aboutUaeGovernment": "حول حكومة الإمارات",
+    "contactUs": "اتصل بنا",
+    "privacyPolicy": "سياسة الخصوصية"
   }
 }

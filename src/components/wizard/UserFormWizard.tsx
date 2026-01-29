@@ -50,7 +50,6 @@ const UserFormWizard: React.FC = () => {
     shouldUnregister: false,
     defaultValues: userFormData,
   });
-  const isLastStep = activeStep === steps.length - 1;
   // reset submit after 5 sec in order to hide alert
   useEffect(() => {
     if (submitSuccess) {
@@ -108,24 +107,46 @@ const UserFormWizard: React.FC = () => {
       });
   };
   return (
-    <FormProvider {...methods}> 
-      {submitSuccess && <Alert variant="filled" severity="success" sx={alertCss}>"Form Submitted"</Alert>}
+    <FormProvider {...methods}>
+      {submitSuccess && (
+        <Alert
+          variant="filled"
+          role="alert"
+          aria-live="polite"
+          severity="success"
+          sx={alertCss}
+        >
+          {t("common.formSubmitted")}
+        </Alert>
+      )}
       {isSubmitting && <Loader />}
-      <form onSubmit={methods.handleSubmit(onSubmit)} className="mt-6">
+      <form
+        onSubmit={methods.handleSubmit(onSubmit)}
+        className="mt-6"
+        aria-busy={isSubmitting}
+      >
         {/* Stepper */}
         <StepperWizard steps={formSteps} activeStep={activeStep} />
         {/* Step Form */}
-        <fieldset className="mx-auto md:max-w-3/5 sm:max-w-full sm:w-full md:w-3/5 mt-6 border p-4 rounded">
+        <fieldset
+          className="  mx-auto md:max-w-3/5 sm:max-w-full sm:w-full md:w-3/5 mt-6 p-6 rounded-xl bg-white border border-gray-200 shadow-lg"
+        >
           <Outlet />
         </fieldset>
         {/* Navigation */}
         <div className="flex justify-center gap-4 mt-6">
           {activeStep > 0 && (
-            <Button variant="outlined" startIcon={<ArrowBackIosIcon />}  onClick={onBack}>{t("common.back")}</Button>
-          )}
-          {!isLastStep ? (
             <Button
-              variant="contained" 
+              variant="outlined"
+              startIcon={<ArrowBackIosIcon />}
+              onClick={onBack}
+            >
+              {t("common.back")}
+            </Button>
+          )}
+          { activeStep < stepPaths.length - 1  ? (
+            <Button
+              variant="contained"
               endIcon={<NavigateNextIcon />}
               onClick={onNext}
             >
@@ -133,11 +154,18 @@ const UserFormWizard: React.FC = () => {
             </Button>
           ) : (
             <>
-              <Button variant="contained" type="submit" endIcon={<SendIcon />} disabled={!methods.formState.isValid || isSubmitting}>
+              <Button
+                variant="contained"
+                type="submit"
+                endIcon={<SendIcon />}
+                disabled={!methods.formState.isValid || isSubmitting}
+              >
                 {t("common.submit")}
               </Button>
               {submitError && (
-                <p className="text-red-600 mt-2">{submitError}</p>
+                <p className="text-red-600 mt-2" role="alert">
+                  {submitError}
+                </p>
               )}
             </>
           )}

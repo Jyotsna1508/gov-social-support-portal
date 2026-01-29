@@ -9,6 +9,7 @@ import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import createCache from "@emotion/cache";
 import stylisRTLPlugin from "stylis-plugin-rtl";
 import { DIRECTION, LANGUAGE } from "./constants/constants";
+import Footer from "./components/layout/Footer";
 
 // Function to create RTL or LTR emotion cache
 // this is used for MUI elements to adapt the language change
@@ -36,13 +37,14 @@ function App() {
         <CssBaseline />
         <LanguageProvider>
           <ErrorBoundary>
-            <div className="min-h-screen bg-gray-50 px-1 py-0 sm:px-0">
+            <div className="min-h-screen bg-gray-50">
               <Header />
-              <main className="mt-6">
+              <main className="mt-6 px-4 sm:px-0">
                 <Router>
                   <AppRoutes />
                 </Router>
               </main>
+              <Footer />
             </div>
           </ErrorBoundary>
         </LanguageProvider>

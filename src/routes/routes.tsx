@@ -15,6 +15,7 @@ export const AppRoutes: React.FC = () => (
     {/* Redirect root to first step */}
     <Route path="/" element={<Navigate to="/user-wizard/personal" />} />
     <Route path="/user-wizard" element={<UserFormWizard />}>
+    <Route index element={<Navigate to="personal" replace />} />
       <Route
         path="personal"
         element={
