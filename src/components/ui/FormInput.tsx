@@ -47,7 +47,7 @@ const FormInputComponent = ({
             </option>
           ))}
         </select>
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
       </div>
     );
   }
@@ -75,7 +75,7 @@ const FormInputComponent = ({
       />
     )}
 
-    {error && <p className="text-red-500 text-sm" role="alert">{error}</p>}
+    {error && <p className="text-red-500 text-sm mt-2" role="alert">{error}</p>}
   </div>
 );
 };
