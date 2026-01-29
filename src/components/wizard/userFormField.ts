@@ -65,7 +65,7 @@ export const PersonalFormData = [
       })),
       validation: REQUIRED("personalInfo.errors.countryRequired"),
     },
-      { name: "personalInfo.phone", label: "personalInfo.phone", type: "number", validation: phoneValidation() },
+      { name: "personalInfo.phone", label: "personalInfo.phone", type: "text", validation: phoneValidation() },
     ],
     [
       { name: "personalInfo.email", label: "personalInfo.email", type: "email", validation: emailValidation() },

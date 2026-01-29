@@ -18,7 +18,7 @@
     },
     "errors": {
       "nameRequired": "Name is required",
-      "nationalIdRequired": "National ID is required",
+      "nationalIdRequired": "Valid National ID is required",
       "nationalIdPattern": "National ID must contain only numbers",
       "dobRequired": "Date of birth is required",
       "genderRequired": "Gender is required",
@@ -27,11 +27,12 @@
       "stateRequired": "State is required",
       "countryRequired": "Country is required",
       "phoneRequired": "Mobile number is required",
-      "phonePattern": "Please enter a valid mobile number",
+      "phonePattern": "Please enter a valid UAE mobile number",
       "emailRequired": "Email address is required",
       "emailPattern": "Please enter a valid email address",
       "ageMustBe18": "Age must be min 18 years",
-      "ageMustBeUnder60": "Age must be less than 60 years"
+      "ageMustBeUnder60": "Age must be less than 60 years",
+      "nationalAllowedLength": "ID must be 9-12 digits"
     }
   },
   "familyInfo": {

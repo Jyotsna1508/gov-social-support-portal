@@ -29,7 +29,7 @@ const FormInputComponent = ({
    // Memoized event handler to prevent recreation on each render
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (type === "number" && e.key === "-") e.preventDefault();
+      if (type === "number" && (e.key === "-" || e.key?.toLowerCase() === "e")) e.preventDefault();
     },
     [type]
   );

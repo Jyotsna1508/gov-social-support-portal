@@ -18,7 +18,7 @@
     },
     "errors": {
       "nameRequired": "الاسم مطلوب",
-      "nationalIdRequired": "الرقم الوطني مطلوب",
+      "nationalIdRequired": "يشترط وجود بطاقة هوية وطنية سارية المفعول",
       "nationalIdPattern": "يجب أن يحتوي الرقم الوطني على أرقام فقط",
       "dobRequired": "تاريخ الميلاد مطلوب",
       "genderRequired": "الجنس مطلوب",
@@ -27,11 +27,12 @@
       "stateRequired": "المنطقة مطلوبة",
       "countryRequired": "الدولة مطلوبة",
       "phoneRequired": "رقم الهاتف مطلوب",
-      "phonePattern": "يرجى إدخال رقم هاتف صحيح",
+      "phonePattern": "يرجى إدخال رقم هاتف جوال إماراتي صحيح",
       "emailRequired": "البريد الإلكتروني مطلوب",
       "emailPattern": "يرجى إدخال بريد إلكتروني صحيح",
       "ageMustBe18": "يجب ألا يقل العمر عن 18 عامًا",
-      "ageMustBeUnder60": "يجب ألا يتجاوز العمر 60 عامًا"
+      "ageMustBeUnder60": "يجب ألا يتجاوز العمر 60 عامًا",
+      "nationalAllowedLength": "يجب أن تتكون الهوية من 9 إلى 12 رقمًا"
     }
   },
   "familyInfo": {

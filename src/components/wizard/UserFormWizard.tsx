@@ -53,6 +53,11 @@ const UserFormWizard: React.FC = () => {
     shouldUnregister: false,
     defaultValues: userFormData,
   });
+  useEffect(() => {
+    if (activeStep >= 0 && activeStep < stepPaths.length) {
+      navigate(`/user-wizard/${stepPaths[activeStep]}`, {replace: true})
+    }
+  }, [activeStep, navigate]);
   // reset submit after 5 sec in order to hide alert
   useEffect(() => {
     if (submitSuccess) {

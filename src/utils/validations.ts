@@ -23,7 +23,7 @@ export const minLengthValidation = (min: number, key: string): RegisterOptions =
  */
 export const UAE_PHONE_PATTERN = /^(?:\+971|0)?5[0-9]{8}$/;
 export const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-export const NUMBERS_ONLY = /^[0-9]+$/;
+export const NUMBERS_ONLY = /^[1-9][0-9]*$/;
 
 /**
  * Name validation
@@ -46,11 +46,11 @@ export const nationalIdValidation = (): RegisterOptions => ({
   },
    minLength: {
     value: 9,
-    message: "common.minLength", }
+    message: "personalInfo.errors.nationalAllowedLength", }
     ,
    maxLength: {
     value: 12,
-    message: "common.maxLength", }
+    message: "personalInfo.errors.nationalAllowedLength", }
 });
 
 /**

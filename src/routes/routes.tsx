@@ -42,6 +42,7 @@ export const AppRoutes: React.FC = () => (
           </Suspense>
         }
       />
+      <Route path="*" element={<Navigate to="/user-wizard/personal" replace/>}/>
     </Route>
   </Routes>
 );
