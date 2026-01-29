@@ -1,3 +1,16 @@
+/**
+ * Generates a prompt string based on the user's financial data and a specific field name.
+ *
+ * @param {Object} financialData - The user's financial information.
+ * @param {string} financialData.maritalStatus - The marital status of the user (e.g., 'single', 'married').
+ * @param {number} financialData.dependents - The number of dependents the user has.
+ * @param {string} financialData.employmentStatus - The employment status of the user (e.g., 'employed', 'unemployed').
+ * @param {number|string} financialData.monthlyIncome - The user's monthly income. Can be a number or numeric string.
+ * @param {string} financialData.housingStatus - The housing situation of the user (e.g., 'owned', 'rented').
+ * @param {string} fieldName - The specific field for which the prompt is being generated.
+ *
+ * @returns {string} A string containing the generated prompt based on the financial data and field name.
+ */
 export const generatePrompt = (
   financialData: {
     maritalStatus: string;

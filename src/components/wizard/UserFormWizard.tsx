@@ -4,6 +4,7 @@ import {
   stepPaths,
   INITIAL_USER_FORM_DATA,
   alertCss,
+  LANGUAGE,
 } from "../../constants/constants";
 import { useTranslation } from "react-i18next";
 import { useForm, FormProvider } from "react-hook-form";
@@ -32,11 +33,13 @@ import type { AppDispatch } from "../../store";
 import Loader from "../ui/Loader";
 import { Alert } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useLanguage } from "../../hooks/useLanguage";
 
 const formSteps = steps;
 
 const UserFormWizard: React.FC = () => {
   const { t } = useTranslation();
+  const { language } = useLanguage();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const activeStep = useSelector(selectActiveStep);
@@ -138,7 +141,8 @@ const UserFormWizard: React.FC = () => {
           {activeStep > 0 && (
             <Button
               variant="outlined"
-              startIcon={<ArrowBackIosIcon />}
+              startIcon={language !== LANGUAGE.AR ? <ArrowBackIosIcon /> : null}
+              endIcon={language === LANGUAGE.AR ? <ArrowBackIosIcon className="rotate-180" /> : null}
               onClick={onBack}
             >
               {t("common.back")}
@@ -147,7 +151,8 @@ const UserFormWizard: React.FC = () => {
           { activeStep < stepPaths.length - 1  ? (
             <Button
               variant="contained"
-              endIcon={<NavigateNextIcon />}
+              startIcon={language === LANGUAGE.AR ? <NavigateNextIcon className="rotate-180" /> : null}
+              endIcon={language !== LANGUAGE.AR ? <NavigateNextIcon /> : null}
               onClick={onNext}
             >
               {t("common.next")}
@@ -157,7 +162,8 @@ const UserFormWizard: React.FC = () => {
               <Button
                 variant="contained"
                 type="submit"
-                endIcon={<SendIcon />}
+                startIcon={language === LANGUAGE.AR ? <SendIcon className="rotate-180" /> : null}
+                endIcon={language !== LANGUAGE.AR ? <SendIcon /> : null}
                 disabled={!methods.formState.isValid || isSubmitting}
               >
                 {t("common.submit")}

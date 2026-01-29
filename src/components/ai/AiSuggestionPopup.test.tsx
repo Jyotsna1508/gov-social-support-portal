@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Button, Modal } from "@mui/material";
+import { describe, expect, vi, test } from "vitest";
 
 /* -------------------- mocks -------------------- */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -44,7 +45,7 @@ describe("AiSuggestionPopup - minimal working tests", () => {
   });
 
   test("calls onAccept when Accept clicked", () => {
-    const onAcceptMock = jest.fn();
+    const onAcceptMock = vi.fn();
     render(<AiSuggestionPopup fieldName="testField" onAccept={onAcceptMock} />);
     fireEvent.click(screen.getByText("Help Me Write"));
     fireEvent.click(screen.getByText("Accept"));

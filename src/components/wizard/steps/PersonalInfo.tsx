@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useFormContext, type FieldValues } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import FormInput from "../../ui/FormInput";
@@ -16,8 +16,30 @@ const PersonalInfo: React.FC = () => {
     register,
     formState: { errors },
   } = useFormContext<FieldValues>();
-// reading values from userFormField
-  const fieldRows = PersonalFormData;
+/**
+ * moving the inline functions for input to  memo to
+ * avoid unnecessary rerenders
+ */
+const processedFields = useMemo(() => {
+  return PersonalFormData.map((row) =>
+    row.map((field) => {
+      const translatedLabel = t(field.label);
+      const processedOptions = field.options?.map((o) => ({
+        ...o,
+        label: typeof o.label === "string" 
+          ? t(o.label) 
+          : (o.label[lang] || o.label.en || ""),
+      }));
+
+      return {
+        ...field,
+        translatedLabel,
+        processedOptions,
+      };
+    })
+  );
+}, [t, lang]);
+
   return (
     <fieldset className="p-4">
       <legend className="text-sm sm:text-xl font-bold mb-4">
@@ -25,7 +47,7 @@ const PersonalInfo: React.FC = () => {
       </legend>
 
       <div className="flex flex-col gap-4">
-        {fieldRows.map((row, rowIndex) => (
+        {processedFields.map((row, rowIndex) => (
           <div
             key={rowIndex}
             className={`grid gap-4 ${row.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}
@@ -41,14 +63,8 @@ const PersonalInfo: React.FC = () => {
                 <FormInput
                   name={field.name}
                   type={field.type}
-                  options={field.options?.map((o) => ({
-                    ...o,
-                    label:
-                      typeof o.label === "string"
-                        ? t(o.label)
-                        : o.label[lang] || o.label.en,
-                  }))}
-                  placeholderKey={t(`${field.label}`)}
+                  options={field.processedOptions}
+                  placeholderKey={field.translatedLabel}
                   register={register}
                   validation={field.validation}
                   error={getErrorMessage(errors, field.name, t)}

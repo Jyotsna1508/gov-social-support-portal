@@ -4,27 +4,29 @@ import { useForm, FormProvider } from "react-hook-form";
 import type { AiSuggestionPopupProps } from "../../../types/ai";
 import type { FormInputProps } from "../../../types/form";
 import SituationInfo from "./SituationInfo";
+import { describe, expect, vi, test } from "vitest";
 
 /* -------------------- mocks -------------------- */
 
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
   }),
 }));
 
-jest.mock("../../ui/FormInput", () => (props: FormInputProps) => {
-  return (
+vi.mock("../../ui/FormInput", () => {
+  const FormInput = (props: FormInputProps) => (
     <textarea
       data-testid={`form-input-${props.name}`}
       name={props.name}
       rows={props.rows || 1}
     />
   );
+  return { default: FormInput };
 });
 
-jest.mock("../../ai/AiSuggestionPopup", () => (props: AiSuggestionPopupProps) => {
-  return (
+vi.mock("../../ai/AiSuggestionPopup", () => {
+  const AiSuggestionPopup = (props: AiSuggestionPopupProps) => (
     <button
       data-testid={`ai-popup-${props.fieldName}`}
       onClick={() => props.onAccept(props.fieldName, "Suggested Text")}
@@ -32,6 +34,7 @@ jest.mock("../../ai/AiSuggestionPopup", () => (props: AiSuggestionPopupProps) =>
       Accept
     </button>
   );
+  return { default: AiSuggestionPopup }; // ✅ must return { default: Component }
 });
 
 /* -------------------- helper -------------------- */
@@ -50,11 +53,12 @@ const renderWithForm = () => {
 describe("SituationInfo Component", () => {
   test("renders title and all fields with AI popup", () => {
     renderWithForm();
+
     expect(screen.getByText("situationInfo.title")).toBeInTheDocument();
     expect(screen.getByTestId("form-input-situationInfo.currentSituation")).toBeInTheDocument();
     expect(screen.getByTestId("form-input-situationInfo.employmentCircumstances")).toBeInTheDocument();
     expect(screen.getByTestId("form-input-situationInfo.reasonForApplying")).toBeInTheDocument();
-
+    
     // check AI popup buttons
     expect(screen.getByTestId("ai-popup-situationInfo.currentSituation")).toBeInTheDocument();
     expect(screen.getByTestId("ai-popup-situationInfo.employmentCircumstances")).toBeInTheDocument();

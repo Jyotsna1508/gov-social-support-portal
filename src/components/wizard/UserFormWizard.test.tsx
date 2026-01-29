@@ -1,38 +1,76 @@
 import UserFormWizard from "./UserFormWizard";
 import { render, screen } from "@testing-library/react";
 import type { ButtonProps } from "@mui/material";
+import { describe, expect, vi, test } from "vitest";
 
 /* -------------------- mocks -------------------- */
 
-jest.mock("../ui/Stepper", () => ({
-  __esModule: true,
-  default: ({ activeStep }: { activeStep: number }) => (
+
+vi.mock("../ui/Stepper", () => {
+  const Stepper = ({ activeStep }: { activeStep: number }) => (
     <div data-testid="stepper">{activeStep}</div>
-  ),
-}));
-
-jest.mock("react-router-dom", () => ({
-  Outlet: () => <div data-testid="outlet" />,
-  useNavigate: () => jest.fn(),
-}));
-
-jest.mock("react-i18next", () => ({
-  useTranslation: () => ({ t: (key: string) => key }),
-}));
-
-jest.mock("@mui/material", () => {
-  const originalModule = jest.requireActual("@mui/material");
+  );
   return {
-    ...originalModule,
-    Button: (props: ButtonProps) => <button {...props}>{props.children}</button>,
+    __esModule: true,
+    default: Stepper,
   };
 });
 
-jest.mock("@mui/icons-material/Send", () => () => <span>SendIcon</span>);
-jest.mock("@mui/icons-material/NavigateNext", () => () => <span>NextIcon</span>);
-jest.mock("@mui/icons-material/ArrowBackIos", () => () => <span>BackIcon</span>);
+vi.mock("react-router-dom", () => {
+  return {
+    __esModule: true,
+    Outlet: () => <div data-testid="outlet" />,
+    useNavigate: () => vi.fn(),
+  };
+});
+vi.mock(
+  "react-i18next",
+  async (importOriginal) => {
+    const actual = await importOriginal<typeof import("react-i18next")>();
+    return {
+      ...actual,
+      useTranslation: () => ({
+        t: (key: string) => key,
+        i18n: actual.useTranslation().i18n,
+      }),
+    };
+  }
+);;
 
-jest.mock("react-redux", () => ({
+vi.mock("../../../hooks/useLanguage", () => ({
+  useLanguage: () => ({
+    language: "en",
+  }),
+}));
+
+vi.mock("@mui/material", async () => {
+  const originalModule = await vi.importActual<typeof import("@mui/material")>(
+    "@mui/material"
+  );
+  return {
+    ...originalModule,
+    Button: (props: ButtonProps) => (
+      <button {...props}>{props.children}</button>
+    ),
+  };
+});
+
+vi.mock("@mui/icons-material/Send", () => {
+  const SendIcon = () => <span>SendIcon</span>;
+  return { __esModule: true, default: SendIcon };
+});
+
+vi.mock("@mui/icons-material/NavigateNext", () => {
+  const NextIcon = () => <span>NextIcon</span>;
+  return { __esModule: true, default: NextIcon };
+});
+
+vi.mock("@mui/icons-material/ArrowBackIos", () => {
+  const BackIcon = () => <span>BackIcon</span>;
+  return { __esModule: true, default: BackIcon };
+});
+
+vi.mock("react-redux", () => ({
   // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   useSelector: (selector: Function) => {
     if (selector.name === "selectActiveStep") return 2;
@@ -40,7 +78,7 @@ jest.mock("react-redux", () => ({
     if (selector.name === "selectFormSubmitError") return null;
     return {};
   },
-  useDispatch: () => jest.fn(),
+  useDispatch: () => vi.fn(),
 }));
 
 /* -------------------- test cases -------------------- */

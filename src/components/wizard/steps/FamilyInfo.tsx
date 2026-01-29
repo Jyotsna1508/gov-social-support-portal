@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useFormContext, type FieldValues } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import FormInput from "../../ui/FormInput";
@@ -11,14 +11,27 @@ const FamilyInfo: React.FC = () => {
     register,
     formState: { errors },
   } = useFormContext<FieldValues>();
- // reading values from userFormField
-  const fieldRows = FamilyFormData;
+  /**
+ * moving the inline functions for input to  memo to
+ * avoid unnecessary rerenders
+ */
+   const optimizedFieldRows = useMemo(() => {
+    return FamilyFormData.map(row => 
+      row.map(field => ({
+        ...field,
+        translatedOptions: field.options?.map(opt => ({
+          ...opt,
+          label: t(opt.label)
+        }))
+      }))
+    );
+  }, [t]);
   return (
     <fieldset className="p-4">
       <legend className="text-sm sm:text-xl font-bold mb-4">{t("familyInfo.title")}</legend>
 
       <div className="flex flex-col gap-4">
-        {fieldRows.map((row, rowIndex) => (
+        {optimizedFieldRows.map((row, rowIndex) => (
           <div
             key={rowIndex}
             className={`grid gap-4 ${row.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}
@@ -31,7 +44,7 @@ const FamilyInfo: React.FC = () => {
                 <FormInput
                   name={field.name}
                   type={field.type}
-                  options={field.options?.map(o => ({ ...o, label: t(o.label) }))}
+                  options={field.translatedOptions}
                   placeholderKey= {t(`${field.label}`)}
                   register={register}
                   validation={field.validation}

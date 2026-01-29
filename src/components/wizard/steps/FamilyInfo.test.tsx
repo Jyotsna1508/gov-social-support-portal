@@ -3,23 +3,26 @@ import { render, screen } from "@testing-library/react";
 import { useForm, FormProvider } from "react-hook-form";
 import FamilyInfo from "./FamilyInfo";
 import type { FormInputProps } from "../../../types/form";
+import { describe, expect, vi, test } from "vitest";
 
 /* -------------------- mocks -------------------- */
 
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
   }),
 }));
 
-jest.mock("../../ui/FormInput", () => (props: FormInputProps) => {
-  return (
+vi.mock("../../ui/FormInput", () => {
+  const FormInput = (props: FormInputProps) => (
     <input
       data-testid={`form-input-${props.name}`}
       name={props.name}
+      placeholder={props.placeholderKey}
       aria-invalid={!!props.error}
     />
   );
+  return { default: FormInput };
 });
 
 

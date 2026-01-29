@@ -3,23 +3,23 @@ import { render, screen } from "@testing-library/react";
 import { useForm, FormProvider } from "react-hook-form";
 import PersonalInfo from "./PersonalInfo";
 import type { FormInputProps } from "../../../types/form";
-
+import { describe, expect, vi, test } from "vitest";
 /* -------------------- mocks -------------------- */
 
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
   }),
 }));
 
-jest.mock("../../../hooks/useLanguage", () => ({
+vi.mock("../../../hooks/useLanguage", () => ({
   useLanguage: () => ({
     language: "en",
   }),
 }));
 
-jest.mock("../../ui/FormInput", () => (props: FormInputProps) => {
-  return (
+vi.mock("../../ui/FormInput", () => {
+  const FormInput = (props: FormInputProps) => (
     <input
       data-testid={`form-input-${props.name}`}
       name={props.name}
@@ -27,6 +27,7 @@ jest.mock("../../ui/FormInput", () => (props: FormInputProps) => {
       aria-invalid={!!props.error}
     />
   );
+  return { default: FormInput };
 });
 
 /* -------------------- helper render -------------------- */

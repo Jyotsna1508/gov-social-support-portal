@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Modal, Box, Typography, Stack, CircularProgress, TextField } from "@mui/material";
 import type { AiSuggestionPopupProps } from "../../types/ai";
@@ -15,7 +15,7 @@ const AiSuggestionPopup = React.memo(({ fieldName, onAccept }: AiSuggestionPopup
   const [loading, setLoading] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [controller, setController] = useState<AbortController | null>(null);
+  const controllerRef = useRef<AbortController | null>(null);
    const [isOpen, setIsOpen] = useState(false);
    
   const handleHelpMeWrite = async() => {
@@ -23,13 +23,12 @@ const AiSuggestionPopup = React.memo(({ fieldName, onAccept }: AiSuggestionPopup
     setPopupText("");
     setLoading(true);
     setIsEditing(false);
-    if(controller) controller.abort();
-    const newController = new AbortController();
-    setController(newController);
+    controllerRef.current?.abort();
+    controllerRef.current = new AbortController();
      try {
       await streamAi({
         prompt: generatePrompt(financialData, fieldName),
-        signal: newController.signal,
+        signal: controllerRef.current.signal,
         onToken: (token: string) => setPopupText((prev) => prev + token),
       });
     } catch (err: unknown) {
@@ -46,26 +45,26 @@ const AiSuggestionPopup = React.memo(({ fieldName, onAccept }: AiSuggestionPopup
   };
 
     const handleClose = useCallback(() => {
-      if (controller) controller.abort();
+      controllerRef.current?.abort();
       setPopupText("");
       setLoading(false);
       setIsEditing(false);
       setError(null);
       setIsOpen(false);
-    }, [controller]);
+    }, []);
 
-    const handleEdit = useCallback(() => {
-      if (controller) controller.abort();
+    const handleEdit = () => {
+      controllerRef.current?.abort();
       setLoading(false);
       setIsEditing(true);
-    }, [controller]);
+    };
 
    const handleAccept = useCallback(() => {
-  if (popupText) {
-    onAccept(fieldName, popupText);
-    handleClose();
-  }
-}, [popupText, fieldName, onAccept, handleClose]);
+      if (popupText) {
+        onAccept(fieldName, popupText);
+        handleClose();
+      }
+    }, [popupText, fieldName, onAccept, handleClose]);
 
   return (
     <>

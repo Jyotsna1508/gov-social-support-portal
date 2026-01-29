@@ -1,6 +1,6 @@
 import { ErrorBoundary } from "./components/ui/ErrorBoundary";
 import Header from "./components/layout/Header";
-import { LanguageProvider } from "./contexts/languageContext/LanguageContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AppRoutes } from "./routes/routes";
 import { useTranslation } from "react-i18next";
@@ -37,9 +37,9 @@ function App() {
         <CssBaseline />
         <LanguageProvider>
           <ErrorBoundary>
-            <div className="min-h-screen bg-gray-50">
+            <div className="min-h-[100dvh] flex flex-col bg-gray-50 ">
               <Header />
-              <main className="mt-6 px-4 sm:px-0">
+              <main className="mt-6 mb-6 px-4 sm:px-0 flex-1">
                 <Router>
                   <AppRoutes />
                 </Router>

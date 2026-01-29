@@ -1,15 +1,16 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Header from "./Header";
+import { describe, it, expect, vi } from "vitest";
 
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
   }),
 }));
 
-const toggleMock = jest.fn();
+const toggleMock = vi.fn();
 
-jest.mock("../../hooks/useLanguage", () => ({
+vi.mock("../../hooks/useLanguage", () => ({
   useLanguage: () => ({
     language: "en",
     toggleLanguage: toggleMock,
