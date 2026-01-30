@@ -71,11 +71,11 @@ vi.mock("@mui/icons-material/ArrowBackIos", () => {
 });
 
 vi.mock("react-redux", () => ({
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-  useSelector: (selector: Function) => {
-    if (selector.name === "selectActiveStep") return 2;
-    if (selector.name === "selectFormSubmitting") return false;
-    if (selector.name === "selectFormSubmitError") return null;
+  useSelector: (selector: (state: unknown) => unknown) => {
+    const name = selector.name;
+    if (name === "selectActiveStep") return 2;
+    if (name === "selectFormSubmitting") return false;
+    if (name === "selectFormSubmitError") return null;
     return {};
   },
   useDispatch: () => vi.fn(),

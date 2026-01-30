@@ -4,8 +4,7 @@ import { Button, Modal } from "@mui/material";
 import { describe, expect, vi, test } from "vitest";
 
 /* -------------------- mocks -------------------- */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const AiSuggestionPopup = ({ fieldName, onAccept }: { fieldName: string; onAccept: (val: string) => void }) => {
+const AiSuggestionPopup = ({ onAccept }: { fieldName: string; onAccept: (val: string) => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
