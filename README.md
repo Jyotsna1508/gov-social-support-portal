@@ -105,11 +105,20 @@ AI response with request(in form of prompt):-
 AI response error handling:-
 ![AI Error](src/assets/ai-error.png)
 
+AI response loader handling:-
+![AI loader](src/assets/ai-loader.png)
+
 Form validation:-
 ![Form Validation](src/assets/error.png)
 
 Form Submitted (user navigate to step 1 with success message):-
 ![Form Validation](src/assets/form-arabic.png)
+
+Form Submission Loader:-
+![Form Submission Loader](src/assets/submission-loader.png)
+
+Form Payload:-
+![Form Payload](src/assets/submitted-data.png)
 
 Tablet view (Ipad pro):-
 ![Tablet View](src/assets/tablet-screenshot.png)
