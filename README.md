@@ -70,7 +70,7 @@ Each field includes strict validation:
 4. Phone Number - UAE-specific phone number validation(+971/05) both are supported
 5. Age - Allowed range: 18–60 only
 6. National ID to be numeric with 9-12 digits
-7. Step 3 (AI Section) fields - Minimum 10 words required for:
+7. Step 3 (AI Section) fields - Minimum 10 words required for each fields
 
 What influenced my decisions
 
