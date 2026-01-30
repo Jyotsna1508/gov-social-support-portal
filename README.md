@@ -91,34 +91,34 @@ What influenced my decisions
 4. Improve test coverage for AI streaming and form validation
 
 Desktop view:-
-![Desktop View](src\assets\desktop-screenshot.png)
+![Desktop View](src/assets/desktop-screenshot.png)
 
 Desktop view step 2 (arabic mode):-
-![Desktop view step 2 (arabic mode)](src\assets\step2-arabic.png)
+![Desktop view step 2 (arabic mode)](src/assets/step2-arabic.png)
 
 Desktop view step 3:-
-![Desktop view step 3](src\assets\step3.png)
+![Desktop view step 3](src/assets/step3.png)
 
 AI response with request(in form of prompt):-
-![AI Response](src\assets\ai-response.png)
+![AI Response](src/assets/ai-response.png)
 
 AI response error handling:-
-![AI Error](src\assets\ai-error.png)
+![AI Error](src/assets/ai-error.png)
 
 Form validation:-
-![Form Validation](src\assets\error.png)
+![Form Validation](src/assets/error.png)
 
 Form Submitted (user navigate to step 1 with success message):-
-![Form Validation](src\assets\form-arabic.png)
+![Form Validation](src/assets/form-arabic.png)
 
 Tablet view (Ipad pro):-
-![Tablet View](src\assets\tablet-screenshot.png)
+![Tablet View](src/assets/tablet-screenshot.png)
 
 Mobile view (Iphone):-
-![Mobile View](src\assets\mobile-screenshot.png)
+![Mobile View](src/assets/mobile-screenshot.png)
 
 Test cases screenshot:-
-![Test cases](src\assets\test-cases.png)
+![Test cases](src/assets/test-cases.png)
 
 
 
